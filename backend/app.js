@@ -8,11 +8,15 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://username:password@cluster0-vqoq7.mongodb.net/meanStack?retryWrites=true&w=majority')
+console.log(process.env.MONGO_ATLAS_PW);
+console.log(process.env.JWT_KEY);
+
+mongoose.connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PW}@cluster0-vqoq7.mongodb.net/meanStack?retryWrites=true&w=majority`)
         .then(() => {
             console.log("Connected Successfully")
         })
-        .catch(() => {
+        .catch(err => {
+            console.log(err);
             console.log("Connection Failed");
         })
 
